@@ -99,7 +99,10 @@ def calculate_disk(xci,zpsi_dx,yy_dy2,x2,z2,x,zpci,xsi,a_r,R1,R2, beta_in, beta_
     d2_no = d2 == 0. 
     int1[d2_no] = 0.
 
+    #Set up the vertical profile
     int2 = np.exp( (0.5/a_r**2)*expo) / int1
+
+    #Include the diluation of starlight. 
     int3 = int2 * d2 
 
     #This version is faster than the integration version because of the vectorized nature of the 
