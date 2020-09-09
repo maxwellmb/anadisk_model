@@ -41,9 +41,9 @@ def congrid(a, newdims, method='linear', centre=False, minusone=False):
     old = np.array( a.shape )
     ndims = len( a.shape )
     if len( newdims ) != ndims:
-        print "[congrid] dimensions error. " \
+        print("[congrid] dimensions error. " \
               "This routine currently only support " \
-              "rebinning to the same number of dimensions."
+              "rebinning to the same number of dimensions.")
         return None
     newdims = np.asarray( newdims, dtype=float )
     dimlist = []
@@ -104,9 +104,9 @@ def congrid(a, newdims, method='linear', centre=False, minusone=False):
         newa = sp.ndimage.map_coordinates(a, newcoords)
         return newa
     else:
-        print "Congrid error: Unrecognized interpolation type.\n", \
+        print("Congrid error: Unrecognized interpolation type.\n", \
               "Currently only \'neighbour\', \'nearest\',\'linear\',", \
-              "and \'spline\' are supported."
+              "and \'spline\' are supported.")
         return None
 
 def spatially_bin_dataset(dataset, bin_width):
@@ -141,8 +141,8 @@ def dist_circle(array, xcen=0.,ycen=0.):
     ndim = np.size(array.shape)
     
     if ndim > 2: 
-        print "DIST_CIRCLE: Right now dist_circle on accepts 2D arrays"
-        print "Returning"
+        print("DIST_CIRCLE: Right now dist_circle on accepts 2D arrays")
+        print("Returning")
         return -1
 
     Y,X = np.indices(array.shape)
@@ -176,7 +176,7 @@ def make_snr_map_pol(fits, fits_n, xcen=140, ycen=140, width=3):
 ########################################################
 def make_snr_map_total_intensity(image, rads, theta_mask):
     snr_map = np.abs(np.copy(image))
-    width = np.shape(image)[0]/2
+    width = int(np.shape(image)[0]//2)
     std_array = np.zeros(width)
 
     for rad in range(width):
@@ -206,7 +206,7 @@ def collapse_spec_dataset(dataset):
 
     #Check to make sure it's not a pol mode cube
     if dataset.prihdrs[0]['DISPERSR'] == 'WOLLASTON':
-        print "You input a pol mode dataset. You probably don't have to collapse it. Returning the original dataset"
+        print("You input a pol mode dataset. You probably don't have to collapse it. Returning the original dataset")
         return dataset
     
     nfiles = np.size(np.unique(dataset.filenames))
